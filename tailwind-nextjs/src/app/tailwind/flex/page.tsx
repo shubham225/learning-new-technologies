@@ -42,7 +42,7 @@ export default function page() {
           <div className="w-16 h-16 bg-blue-400 rounded-md"></div>
           <div className="w-16 h-16 bg-violet-400 rounded-md"></div>
         </div>
-        </div>
+      </div>
     </div>
   );
 }
