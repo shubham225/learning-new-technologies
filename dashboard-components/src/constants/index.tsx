@@ -1,23 +1,29 @@
+import { AiOutlineMail } from "react-icons/ai";
+import { AiOutlineHome } from "react-icons/ai";
+import { AiOutlineBarChart } from "react-icons/ai";
+import { TbComponents } from "react-icons/tb";
+import { AiOutlineTable } from "react-icons/ai";
+
 export const sidebarLinks = [
   {
-    imgURL: "/icons/home.svg",
+    icon: <AiOutlineHome className="h-6 w-6" />,
     route: "/",
     label: "Home",
   },
   {
-    imgURL: "/icons/dollar-circle.svg",
-    route: "/my-banks",
-    label: "My Banks",
+    icon: <AiOutlineBarChart className="h-6 w-6" />,
+    route: "/charts",
+    label: "Charts",
   },
   {
-    imgURL: "/icons/transaction.svg",
-    route: "/transaction-history",
-    label: "Transaction History",
+    icon: <TbComponents className="h-6 w-6" />,
+    route: "/ui-components",
+    label: "Components",
   },
   {
-    imgURL: "/icons/money-send.svg",
-    route: "/payment-transfer",
-    label: "Transfer Funds",
+    icon: <AiOutlineTable className="h-6 w-6" />,
+    route: "/tables",
+    label: "Tables",
   },
 ];
 
