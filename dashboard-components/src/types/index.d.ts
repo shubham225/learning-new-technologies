@@ -1,5 +1,7 @@
 /* eslint-disable no-unused-vars */
 
+import { FieldPath } from "react-hook-form";
+
 declare type SearchParamProps = {
   params: { [key: string]: string };
   searchParams: { [key: string]: string | string[] | undefined };
@@ -327,4 +329,13 @@ declare interface getBankProps {
 
 declare interface getBankByAccountIdProps {
   accountId: string;
+}
+
+interface InputFieldProps {
+  control: Control<z.infer<typeof loginFormSchema>>,
+  name: FieldPath<z.infer<typeof loginFormSchema>>,
+  id?: string,
+  label: string,
+  type?: string,
+  placeholder?: string
 }

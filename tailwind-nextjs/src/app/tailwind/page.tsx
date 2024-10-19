@@ -18,6 +18,11 @@ export default function page() {
         <button className="rounded-lg border font-bold border-blue-600 text-white w-32 p-2 transition ease-in-out delay-150 bg-blue-500 hover:-translate-y-1 hover:-scale-105 hover:bg-indigo-500 duration-300">
           Components
         </button>
+
+        <span className="relative flex h-3 w-3">
+          <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-sky-400 opacity-75"></span>
+          <span className="relative inline-flex rounded-full h-3 w-3 bg-sky-500"></span>
+        </span>
       </Link>
     </div>
   );

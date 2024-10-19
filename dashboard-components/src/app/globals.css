@@ -271,7 +271,7 @@
   }
 
   .form-item {
-    @apply flex flex-col gap-1.5;
+    @apply flex flex-col gap-1;
   }
 
   .form-label {
@@ -382,5 +382,26 @@
 
   .mobilenav-label {
     @apply text-16 font-semibold text-black-2;
+  }
+
+  /* Auth Page */
+  
+  .authpage-logo {
+    @apply font-ibm-plex-serif text-[24px] font-bold text-black-1;
+  }
+
+
+  /* Tailwind animate-spin is not working so written my own spinner */
+  .loader {
+    animation: spin 1s linear infinite;
+  }
+  
+  @keyframes spin {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
   }
 }
