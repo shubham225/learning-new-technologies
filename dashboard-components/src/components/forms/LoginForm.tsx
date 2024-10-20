@@ -1,7 +1,5 @@
 "use client";
 
-import Image from "next/image";
-import Link from "next/link";
 import React, { useState } from "react";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -16,11 +14,9 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
 import { loginFormSchema } from "@/lib/form-schema/authFormSchema";
 import InputField from "../ui-custom/InputField";
-import { Loader, Loader2 } from "lucide-react";
-import { cn } from "@/lib/utils";
+import { Loader2 } from "lucide-react";
 
 export default function LoginForm() {
   const [user, setUser] = useState(null);
@@ -31,6 +27,7 @@ export default function LoginForm() {
     resolver: zodResolver(loginFormSchema),
     defaultValues: {
       username: "",
+      password: "",
     },
   });
 
@@ -44,12 +41,12 @@ export default function LoginForm() {
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
         <InputField
           control={form.control}
           name="username"
-          label="Username"
-          placeholder="Username"
+          label="Email"
+          placeholder="Email"
         />
         <InputField
           control={form.control}
@@ -62,7 +59,7 @@ export default function LoginForm() {
           <Button type="submit" className="form-btn" disabled={isLoading}>
             {isLoading ? (
               <>
-                <Loader2 size={20} className="loader" /> Loading...{" "}
+                <Loader2 size={20} className="animate-spin" /> Loading...{" "}
               </>
             ) : (
               <>Sign In</>

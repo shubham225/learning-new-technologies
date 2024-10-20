@@ -13,7 +13,7 @@ export default function Sidebar() {
   return (
     <section className="sidebar">
       <nav className="flex flex-col gap-4">
-        <Link href="/" className="flex mb-12 cursor-pointer gap-2">
+        <Link href="/" className="flex mb-12 items-center cursor-pointer gap-2">
           <Image
             src="/icons/logo.svg"
             alt="App logo"

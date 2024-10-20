@@ -1,3 +1,4 @@
+import AppLogo from "@/components/AppLogo";
 import LoginForm from "@/components/forms/LoginForm";
 import Image from "next/image";
 import Link from "next/link";
@@ -5,13 +6,8 @@ import React from "react";
 
 export default function Login() {
   return (
-    <section className="auth-form">
+    <>
       <header className="flex flex-col gap-5 md:gap-6">
-        <Link href="/" className="flex cursor-pointer items-center gap-1">
-          <Image src="/icons/logo.svg" alt="App logo" width={30} height={30} />
-          <h1 className="authpage-logo">AppName</h1>
-        </Link>
-
         <div className="flex flex-col gap-1 md:gap-2">
           <h1 className="text-24 lg:text-36 font-semibold text-gray-900">
             Sign In
@@ -30,6 +26,6 @@ export default function Login() {
           Sign up
         </Link>
       </footer>
-    </section>
+    </>
   );
 }
