@@ -36,7 +36,7 @@ export default function MobileNav() {
               </SheetClose>
               <div className="mobilenav-sheet">
                 <SheetClose asChild>
-                  <nav className="flex h-full flex-col gap-4">
+                  <nav className="flex h-full flex-col gap-2">
                     {sidebarLinks.map((item) => {
                       const isActive =
                         pathname === item.route ||

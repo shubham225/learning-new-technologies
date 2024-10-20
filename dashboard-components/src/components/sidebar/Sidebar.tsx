@@ -6,13 +6,14 @@ import { sidebarLinks } from "@/constants";
 import { usePathname } from "next/navigation";
 import NavItem from "./NavItem";
 import AppLogo from "../AppLogo";
+import FooterCard from "../FooterCard";
 
 export default function Sidebar() {
   const pathname = usePathname();
 
   return (
     <section className="sidebar">
-      <nav className="flex flex-col gap-4">
+      <nav className="flex flex-col gap-3">
         <Link href="/">
           <AppLogo type="sidebar" />
         </Link>
@@ -31,7 +32,7 @@ export default function Sidebar() {
           );
         })}
       </nav>
-      FOOT
+      <FooterCard />
     </section>
   );
 }

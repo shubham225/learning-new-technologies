@@ -213,7 +213,7 @@
   }
 
   .header-box-title {
-    @apply text-24 lg:text-30 font-semibold text-gray-900;
+    @apply text-24 lg:text-30 font-medium text-gray-900;
   }
 
   .header-box-subtext {
@@ -360,20 +360,20 @@
   }
 
   .sidebar-link {
-    @apply flex gap-2 items-center py-1 md:p-3 2xl:p-4 rounded-lg justify-center xl:justify-start;
+    @apply flex gap-2 items-center md:p-3 2xl:p-3 rounded-lg justify-center xl:justify-start dark:hover:bg-zinc-800 hover:bg-violet-50;
   }
 
   .sidebar-label {
-    @apply text-16 font-semibold text-black-2 max-xl:hidden;
+    @apply text-16 font-medium text-black-2 max-xl:hidden;
   }
-  
+
   /* Mobile nav */
   .mobilenav-sheet {
     @apply flex h-[calc(100vh-72px)] flex-col justify-between overflow-y-auto;
   }
 
   .mobilenav-sheet_close {
-    @apply flex gap-3 items-center p-4 rounded-lg w-full max-w-60;
+    @apply flex gap-3 items-center p-3 rounded-lg w-full max-w-60;
   }
 
   .mobilenav-logo {
@@ -381,15 +381,11 @@
   }
 
   .mobilenav-label {
-    @apply text-16 font-semibold text-black-2 ;
-  }
-
-  .app-logo-text {
-    @apply font-ibm-plex-serif font-bold text-black-1;
+    @apply text-16 font-semibold text-black-2;
   }
 
   /* Auth Page */
-  
+
   .authpage-logo {
     @apply font-ibm-plex-serif text-[18px] font-bold text-black-1;
   }
