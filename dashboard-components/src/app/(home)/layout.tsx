@@ -1,7 +1,6 @@
-import Sidebar from "@/components/Sidebar";
-import Image from "next/image";
+import Sidebar from "@/components/sidebar/Sidebar";
 import React from "react";
-import MobileNav from "@/components/MobileNav";
+import MobileNav from "@/components/sidebar/MobileNav";
 
 export default function HomeLayout({
   children,
@@ -12,17 +11,7 @@ export default function HomeLayout({
     <main className="flex h-screen w-full font-inter">
       <Sidebar />
       <div className="flex size-full flex-col">
-        <div className="root-layout">
-          <Image
-              src="/icons/logo.svg"
-              alt="App logo"
-              width={34}
-              height={34}
-            />
-            <div>
-              <MobileNav />
-            </div>
-        </div>
+        <MobileNav />
         {children}
       </div>
     </main>

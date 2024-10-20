@@ -11,11 +11,21 @@ export default function Home() {
           <HeaderBox title="Home" subtext="Access and manage dashboard" />
           <AmountDisplay amount={1234.56} />
         </header>
-        HOME CONTENT
 
-        <article>
-        {Array.from({ length: 10 }, (_, i) => <span key={i}>Lorem ipsum dolor sit amet consectetur adipisicing elit. Vitae unde, corporis dolorum quasi aperiam totam, officia ad reiciendis doloribus ea, quisquam modi at error corrupti maiores? Iste numquam pariatur alias!</span>)}
-        </article> 
+        <div>
+          HOME CONTENT
+          <article>
+            {Array.from({ length: 10 }, (_, i) => (
+              <span key={i}>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Vitae
+                unde, corporis dolorum quasi aperiam totam, officia ad
+                reiciendis doloribus ea, quisquam modi at error corrupti
+                maiores? Iste numquam pariatur alias!
+              </span>
+            ))}
+          </article>
+        </div>
+        
       </div>
       <RightSideBar />
     </section>

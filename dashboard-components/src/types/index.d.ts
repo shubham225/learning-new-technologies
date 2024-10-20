@@ -1,6 +1,7 @@
 /* eslint-disable no-unused-vars */
 
 import { FieldPath } from "react-hook-form";
+import { any } from "zod";
 
 declare type SearchParamProps = {
   params: { [key: string]: string };
@@ -213,7 +214,7 @@ declare interface TotalBalanceBoxProps {
 
 declare interface FooterProps {
   user: User;
-  type?: 'mobile' | 'desktop'
+  type?: "mobile" | "desktop";
 }
 
 declare interface RightSidebarProps {
@@ -330,12 +331,27 @@ declare interface getBankProps {
 declare interface getBankByAccountIdProps {
   accountId: string;
 }
+// My declarations
+// Types
+declare type ComponentSize = "sm" | "md" | "lg" | "xl";
 
-interface InputFieldProps {
-  control: Control<z.infer<typeof loginFormSchema>>,
-  name: FieldPath<z.infer<typeof loginFormSchema>>,
-  id?: string,
-  label: string,
-  type?: string,
-  placeholder?: string
+// Interfaces
+declare interface InputFieldProps {
+  control: Control<z.infer<typeof loginFormSchema>>;
+  name: FieldPath<z.infer<typeof loginFormSchema>>;
+  id?: string;
+  label: string;
+  type?: string;
+  placeholder?: string;
+}
+
+declare interface AppLogoProps {
+  type?: "sidebar" | "mobileNav" | "authPage";
+}
+
+declare interface NavItemProps {
+  label: string;
+  icon: React.JSX.Element;
+  isActive: boolean;
+  isMobile?: boolean;
 }
