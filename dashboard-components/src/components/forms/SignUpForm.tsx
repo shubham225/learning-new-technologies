@@ -1,27 +1,14 @@
 "use client";
 
-import Image from "next/image";
-import Link from "next/link";
 import React, { useState } from "react";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { Button } from "@/components/ui/button";
-import {
-  Form,
-  FormControl,
-  FormDescription,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from "@/components/ui/form";
-import {
-  loginFormSchema,
-  signUpFormSchema,
-} from "@/lib/form-schema/authFormSchema";
+import { Form } from "@/components/ui/form";
+import { signUpFormSchema } from "@/lib/form-schema/authFormSchema";
 import InputField from "../ui-custom/InputField";
-import { Loader, Loader2 } from "lucide-react";
+import { Loader2 } from "lucide-react";
 
 export default function SignUpForm() {
   const [user, setUser] = useState(null);
@@ -46,7 +33,7 @@ export default function SignUpForm() {
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
-        <div className="flex gap-2">
+        <div className="flex justify-between gap-2">
           <InputField
             control={form.control}
             name="firstname"
@@ -66,7 +53,7 @@ export default function SignUpForm() {
           label="Address"
           placeholder="Enter your address"
         />
-        <div className="flex gap-2">
+        <div className="flex justify-between gap-2">
           <InputField
             control={form.control}
             name="state"
@@ -80,12 +67,12 @@ export default function SignUpForm() {
             placeholder="ex. 123456"
           />
         </div>
-        <div className="flex gap-2">
+        <div className="flex justify-between gap-2">
           <InputField
             control={form.control}
             name="username"
             label="Email"
-            placeholder="Email"
+            placeholder="Enter your email"
           />
           <InputField
             control={form.control}
@@ -98,7 +85,7 @@ export default function SignUpForm() {
           control={form.control}
           name="password"
           label="Password"
-          placeholder="Password"
+          placeholder="Create a password"
           type="password"
         />
         <div className="flex flex-col gap-2">

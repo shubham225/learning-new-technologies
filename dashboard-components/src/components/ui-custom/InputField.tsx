@@ -1,12 +1,16 @@
 import React from "react";
 import { FormControl, FormField, FormLabel, FormMessage } from "../ui/form";
 import { Input } from "../ui/input";
-import { Control, Form } from "react-hook-form";
-import { z } from "zod";
-import { loginFormSchema } from "@/lib/form-schema/authFormSchema";
 import { InputFieldProps } from "@/types";
 
-export default function InputField({ control, name, label, placeholder, type="text" }: InputFieldProps) {
+export default function InputField({
+  control,
+  name,
+  label,
+  placeholder,
+  type = "text",
+  ...props
+}: InputFieldProps) {
   return (
     <FormField
       control={control}
@@ -22,6 +26,7 @@ export default function InputField({ control, name, label, placeholder, type="te
                 type={type}
                 className="input-class"
                 {...field}
+                {...props}
               />
             </FormControl>
             <FormMessage className="form-message mt-2" />

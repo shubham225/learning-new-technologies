@@ -21,7 +21,7 @@ const config: Config = {
         fill: {
           1: "rgba(255, 255, 255, 0.10)",
         },
-        bankGradient: "#0179FE",
+        primary: "#0179FE",
         indigo: {
           500: "#6172F3",
           700: "#3538CD",
@@ -65,15 +65,14 @@ const config: Config = {
           600: "#475467",
           700: "#344054",
           900: "#101828",
-        },
-        primary: "#001AFF",
-        secondary: "#8B8DFD",
+        }
       },
       backgroundImage: {
         "primary-gradient": "linear-gradient(90deg, #0179FE 0%, #4893FF 100%)",
         "bank-gradient": "linear-gradient(90deg, #0179FE 0%, #4893FF 100%)",
         "gradient-mesh": "url('/icons/gradient-mesh.svg')",
-        "bank-green-gradient": "linear-gradient(90deg, #01797A 0%, #489399 100%)",
+        "bank-green-gradient":
+          "linear-gradient(90deg, #01797A 0%, #489399 100%)",
       },
       boxShadow: {
         form: "0px 1px 2px 0px rgba(16, 24, 40, 0.05)",

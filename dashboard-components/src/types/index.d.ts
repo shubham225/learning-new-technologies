@@ -336,7 +336,7 @@ declare interface getBankByAccountIdProps {
 declare type ComponentSize = "sm" | "md" | "lg" | "xl";
 
 // Interfaces
-declare interface InputFieldProps {
+declare interface InputFieldProps extends React.InputHTMLAttributes<HTMLInputElement> {
   control: Control<z.infer<typeof loginFormSchema>>;
   name: FieldPath<z.infer<typeof loginFormSchema>>;
   id?: string;
