@@ -1,8 +1,10 @@
+import { ModeToggle } from "@/components/ModeToggle";
 import React from "react";
 
 export default function page() {
   return (
     <div>
+      <ModeToggle />
       <h1 className="text-8xl font-thin antialiased">
         This is 8xl antialiased Text
       </h1>

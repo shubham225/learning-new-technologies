@@ -1,13 +1,12 @@
 import colors from 'tailwindcss/colors'
+import type { Config } from "tailwindcss";
 
-module.exports = {
+const config: Config = {
   darkMode: ['class'],
   content: [
-    './pages/**/*.{ts,tsx}',
-    './components/**/*.{ts,tsx}',
-    './app/**/*.{ts,tsx}',
-    './src/**/*.{ts,tsx}',
-    './node_modules/@tremor/**/*.{js,ts,jsx,tsx}', // Tremor module
+    "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
+    "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
+    "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
     container: {
@@ -186,4 +185,6 @@ module.exports = {
     },
   ],
   plugins: [require('tailwindcss-animate')],
-}
+} satisfies Config;
+
+export default config;

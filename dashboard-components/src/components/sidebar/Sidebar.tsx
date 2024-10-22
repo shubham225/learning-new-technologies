@@ -7,6 +7,7 @@ import { usePathname } from "next/navigation";
 import NavItem from "./NavItem";
 import AppLogo from "../AppLogo";
 import FooterCard from "../FooterCard";
+import { ModeToggle } from "../ModeToggle";
 
 export default function Sidebar() {
   const pathname = usePathname();
@@ -32,6 +33,7 @@ export default function Sidebar() {
           );
         })}
       </nav>
+      <ModeToggle />
       <FooterCard />
     </section>
   );
