@@ -3,7 +3,7 @@
 import { Card } from "@/components/ui/card";
 import { ChartConfig, ChartContainer } from "@/components/ui/chart";
 import React from "react";
-import { Bar, BarChart } from "recharts";
+import { Bar, BarChart, Legend } from "recharts";
 import {
   AreaChart,
   Area,
@@ -79,6 +79,44 @@ const chartConfig = {
   },
 } satisfies ChartConfig;
 
+const rows = [
+  {
+    "name": "Page A",
+    "uv": 4000,
+    "pv": 2400
+  },
+  {
+    "name": "Page B",
+    "uv": 3000,
+    "pv": 1398
+  },
+  {
+    "name": "Page C",
+    "uv": 2000,
+    "pv": 9800
+  },
+  {
+    "name": "Page D",
+    "uv": 2780,
+    "pv": 3908
+  },
+  {
+    "name": "Page E",
+    "uv": 1890,
+    "pv": 4800
+  },
+  {
+    "name": "Page F",
+    "uv": 2390,
+    "pv": 3800
+  },
+  {
+    "name": "Page G",
+    "uv": 3490,
+    "pv": 4300
+  }
+]
+
 export default function Charts() {
   return (
     //   <ChartContainer config={chartConfig} className="min-h-[200px] w-full">
@@ -87,12 +125,10 @@ export default function Charts() {
     //     <Bar dataKey="mobile" fill="var(--color-mobile)" radius={4} />
     //   </BarChart>
     // </ChartContainer>
-    <div className="p-20">
-      <Card>
-        <ResponsiveContainer width="100%" height="100%">
+    <div className="p-20 h-full">
+      {/* <Card className="size-full">
+        <ResponsiveContainer width="99%" height="300">
           <AreaChart
-            width={500}
-            height={400}
             data={data}
             margin={{
               top: 10,
@@ -112,6 +148,20 @@ export default function Charts() {
               fill="#8884d8"
             />
           </AreaChart>
+        </ResponsiveContainer>
+      </Card> */}
+      <Card className="size-full">
+      <ResponsiveContainer height={"100%"} width={"100%"}>
+      <BarChart width={730} height={250} data={data}>
+        <CartesianGrid strokeDasharray="3 3" />
+        <XAxis dataKey="name" />
+        <YAxis />
+        <Tooltip />
+        <Legend />
+        <Bar dataKey="pv" fill="#8884d8" />
+        <Bar dataKey="uv" fill="#82ca9d" />
+      </BarChart>
+        
         </ResponsiveContainer>
       </Card>
     </div>
