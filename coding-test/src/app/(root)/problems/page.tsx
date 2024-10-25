@@ -12,29 +12,31 @@ const data: Problem[] = [
     status: "open",
     title: "Two Sum",
     difficulty: "medium",
-    solutionURI: "https://leetcode.com/problemset/"
+    solutionURI: "https://leetcode.com/problemset/",
   },
   {
     id: "728ed53f",
     status: "attempted",
     title: "Search Insert Position",
     difficulty: "easy",
-    solutionURI: "https://leetcode.com/problemset/"
+    solutionURI: "https://leetcode.com/problemset/",
   },
   {
     id: "728ed5df",
     status: "solved",
     title: "Four Sum",
     difficulty: "hard",
-    solutionURI: "https://leetcode.com/problemset/"
+    solutionURI: "https://leetcode.com/problemset/",
   },
 ];
 
 const problems = (props: Props) => {
   return (
-    <div className="size-full p-2">
-      <DataTable columns={columns} data={data} />
-    </div>
+    <main className="size-full p-2">
+      <Card>
+        <DataTable columns={columns} data={data} />
+      </Card>
+    </main>
   );
 };
 

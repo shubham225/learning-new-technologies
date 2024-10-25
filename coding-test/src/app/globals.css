@@ -65,11 +65,11 @@ body {
 @layer base {
   :root {
     --background: 0 0% 100%;
-    --foreground: 224 71.4% 4.1%;
+    --foreground: 0, 0%, 12%;
     --card: 0 0% 100%;
-    --card-foreground: 224 71.4% 4.1%;
+    --card-foreground: 0, 0%, 12%;
     --popover: 0 0% 100%;
-    --popover-foreground: 224 71.4% 4.1%;
+    --popover-foreground: 0, 0%, 12%;
     --primary: 262.1 83.3% 57.8%;
     --primary-foreground: 210 20% 98%;
     --secondary: 220 14.3% 95.9%;
@@ -92,11 +92,11 @@ body {
   }
 
   .dark {
-    --background: 224 71.4% 4.1%;
+    --background: 0 0% 9%;
     --foreground: 210 20% 98%;
-    --card: 224 71.4% 4.1%;
+    --card: 0 0% 12%;
     --card-foreground: 210 20% 98%;
-    --popover: 224 71.4% 4.1%;
+    --popover: 0 0% 12%;
     --popover-foreground: 210 20% 98%;
     --primary: 263.4 70% 50.4%;
     --primary-foreground: 210 20% 98%;
@@ -108,7 +108,7 @@ body {
     --accent-foreground: 210 20% 98%;
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 210 20% 98%;
-    --border: 215 27.9% 16.9%;
+    --border: 240 3% 25%;
     --input: 215 27.9% 16.9%;
     --ring: 263.4 70% 50.4%;
     --chart-1: 220 70% 50%;
@@ -119,27 +119,6 @@ body {
   }
 
 }
-/* Split JS */
-.split {
-  display: flex;
-  flex-direction: row;
-}
-
-.gutter {
-  background-color: #eee;
-  background-repeat: no-repeat;
-  background-position: 50%;
-}
-
-.gutter.gutter-horizontal {
-  /* background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAeCAYAAADkftS9AAAAIklEQVQoU2M4c+bMfxAGAgYYmwGrIIiDjrELjpo5aiZeMwF+yNnOs5KSvgAAAABJRU5ErkJggg=="); */
-  cursor: col-resize;
-}
-
-.gutter.gutter-vertical {
-  /* background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAFAQMAAABo7865AAAABlBMVEVHcEzMzMzyAv2sAAAAAXRSTlMAQObYZgAAABBJREFUeF5jOAMEEAIEEFwAn3kMwcB6I2AAAAAASUVORK5CYII='); */
-  cursor: row-resize;
-}
 
 @layer base {
   * {
@@ -148,4 +127,5 @@ body {
   body {
     @apply bg-background text-foreground;
   }
+
 }

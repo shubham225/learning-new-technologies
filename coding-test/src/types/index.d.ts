@@ -8,3 +8,5 @@ export type Problem = {
   difficulty: DifficultyLevel;
   solutionURI: string;
 };
+
+export type supportedLanguage = "java" | "javascript";
