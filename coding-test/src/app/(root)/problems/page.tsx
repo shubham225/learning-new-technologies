@@ -8,21 +8,21 @@ type Props = {};
 
 const data: Problem[] = [
   {
-    id: "728ed52f",
+    id: "two-sum",
     status: "open",
     title: "Two Sum",
     difficulty: "medium",
     solutionURI: "https://leetcode.com/problemset/",
   },
   {
-    id: "728ed53f",
+    id: "search-insert-position",
     status: "attempted",
     title: "Search Insert Position",
     difficulty: "easy",
     solutionURI: "https://leetcode.com/problemset/",
   },
   {
-    id: "728ed5df",
+    id: "four-sum",
     status: "solved",
     title: "Four Sum",
     difficulty: "hard",
@@ -33,9 +33,7 @@ const data: Problem[] = [
 const problems = (props: Props) => {
   return (
     <main className="size-full p-2">
-      <Card>
-        <DataTable columns={columns} data={data} />
-      </Card>
+      <DataTable columns={columns} data={data} />
     </main>
   );
 };

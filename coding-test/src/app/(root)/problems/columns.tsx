@@ -13,18 +13,7 @@ export const columns: ColumnDef<Problem>[] = [
   },
   {
     accessorKey: "title",
-
-    header: ({ column }) => {
-      return (
-        <Button
-          variant="ghost"
-          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-        >
-          Title
-        </Button>
-      );
-    },
-    cell: ({ row }) => <div className="lowercase">{row.getValue("title")}</div>,
+    header: "Title"
   },
   {
     accessorKey: "difficulty",
@@ -38,6 +27,7 @@ export const columns: ColumnDef<Problem>[] = [
       return (
         <Button
           variant="default"
+          size="sm"
           onClick={() => {
             console.log(row);
             router.push(`problems/${row.original.id}`)

@@ -1,37 +1,53 @@
 import React from "react";
 
-import { javascript } from "@codemirror/lang-javascript";
+import { java } from "@codemirror/lang-java";
 import { vscodeDark, vscodeLight } from "@uiw/codemirror-theme-vscode";
-import CodeMirror from "@uiw/react-codemirror";
+import CodeMirror, { ViewUpdate } from "@uiw/react-codemirror";
 import { useTheme } from "next-themes";
-import { Braces, Code, IterationCw, Undo, Undo2 } from "lucide-react";
+import { Braces, IterationCw } from "lucide-react";
 import { Separator } from "../ui/separator";
 import {
   Select,
   SelectContent,
   SelectGroup,
   SelectItem,
-  SelectLabel,
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
 import { supportedLanguage } from "@/types";
+import { Button } from "../ui/button";
 
 type Props = {};
 
 const CodeWindow = (props: Props) => {
-  const { theme } = useTheme();
-  const [value, setValue] = React.useState(`class Solution {
+  const initialCode = {
+    java: `class Solution {
     public int[] twoSum(int[] nums, int target) {
         // Write your code here
     }
-}`);
+}`,
+    javascript: `console.log('Hello World!!!')`,
+  };
 
+  const { theme } = useTheme();
   const [selectedLang, setSelectedlang] =
     React.useState<supportedLanguage>("java");
-  const onChange = React.useCallback((val: any, viewUpdate: any) => {
-    console.log("val:", val);
-    setValue(val);
+  const [code, setCode] = React.useState(initialCode[selectedLang]);
+
+  const resetEditor = React.useCallback(() => {
+    setCode(initialCode[selectedLang]);
+  }, [selectedLang]);
+
+  const onCodeChange = React.useCallback(
+    (value: string, viewUpdate: ViewUpdate) => {
+      setCode(value);
+    },
+    []
+  );
+
+  const onLangChange = React.useCallback((val: supportedLanguage) => {
+    setSelectedlang(val);
+    setCode(initialCode[val]);
   }, []);
 
   return (
@@ -43,8 +59,12 @@ const CodeWindow = (props: Props) => {
         </div>
       </div>
       <div className="flex flex-row justify-between p-0 px-2">
-        <Select defaultValue={selectedLang} >
-          <SelectTrigger className="w-[120px] h-8 bg-transparent border-none">
+        <Select
+          defaultValue={selectedLang}
+          value={selectedLang}
+          onValueChange={onLangChange}
+        >
+          <SelectTrigger className="w-auto gap-2 h-8 border-none focus:ring-transparent dark:bg-[#1e1e1e]">
             <SelectValue />
           </SelectTrigger>
           <SelectContent>
@@ -54,14 +74,16 @@ const CodeWindow = (props: Props) => {
             </SelectGroup>
           </SelectContent>
         </Select>
-        <IterationCw className="p-1" />
+        <Button variant="ghost" size="icon" onClick={resetEditor}>
+          <IterationCw />
+        </Button>
       </div>
       <Separator />
       <div className="overflow-auto h-full max-h-fit">
         <CodeMirror
-          value={value}
-          extensions={[javascript({ jsx: true })]}
-          onChange={onChange}
+          value={code}
+          extensions={[java()]}
+          onChange={onCodeChange}
           theme={theme === "light" ? vscodeLight : vscodeDark}
         />
       </div>

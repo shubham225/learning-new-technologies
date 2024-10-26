@@ -2,12 +2,22 @@ import { useParams } from "next/navigation";
 import React from "react";
 import MarkdownPreview from "@uiw/react-markdown-preview";
 import { useTheme } from "next-themes";
+import { Badge } from "../ui/badge";
+import { CircleCheck, CircleCheckBig, Clock } from "lucide-react";
+import { cn } from "@/lib/utils";
 
 type Props = {};
 
 const ProblemDescription = (props: Props) => {
   const param = useParams();
-  const source = `
+  let problem = {
+    id: param.problemId,
+    source: "",
+    dificulty: "Easy",
+    status: "Pending",
+  };
+
+  problem.source = `
 Given an array of integers nums and an integer target, return indices of the two numbers such that they add up to target.
 You may assume that each input would have exactly one solution, and you may not use the same element twice.
 You can return the answer in any order.
@@ -33,20 +43,43 @@ You can return the answer in any order.
   const { theme } = useTheme();
 
   return (
-    <div className="flex flex-col p-2 px-4 h-full">
-      <h1 className="text-lg font-semibold">
-        Description of : {param.problemId}
-      </h1>
-      <MarkdownPreview
-        wrapperElement={
-          theme === "light"
-            ? { "data-color-mode": "light" }
-            : { "data-color-mode": "dark" }
-        }
-        source={source}
-        className="pt-4 h-[calc(100vh_-_190px)] overflow-auto"
-        style={{ background: "transparent" }}
-      />
+    <div className="p-2 px-4 h-full">
+      <div className="flex flex-col h-full overflow-auto">
+        <h1 className="text-lg font-semibold">Description of : {problem.id}</h1>
+        <div className="flex gap-2 py-2">
+          <Badge
+            variant="secondary"
+            className={cn("font-normal", {
+              "text-teal-400": problem.dificulty === "Easy",
+              "text-orange-400": problem.dificulty === "Medium",
+              "text-red-500": problem.dificulty === "Hard",
+            })}
+          >
+            {problem.dificulty}
+          </Badge>
+          <Badge
+            variant="secondary"
+            className={cn("font-normal", {
+              "text-teal-400": problem.status === "Solved",
+              "text-orange-400": problem.status === "Pending",
+            })}
+          >
+            {problem.status === "Solved" && <CircleCheckBig className="p-1" />}
+            {problem.status === "Pending" && <Clock className="p-1" />}
+            {problem.status}
+          </Badge>
+        </div>
+        <MarkdownPreview
+          wrapperElement={
+            theme === "light"
+              ? { "data-color-mode": "light" }
+              : { "data-color-mode": "dark" }
+          }
+          source={problem.source}
+          className="h-[calc(100vh_-_250px)]"
+          style={{ background: "transparent" }}
+        />
+      </div>
     </div>
   );
 };
