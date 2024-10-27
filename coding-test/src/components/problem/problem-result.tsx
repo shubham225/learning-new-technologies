@@ -2,15 +2,15 @@ import React from 'react'
 import { Card } from '../ui/card'
 import { DataTable } from '../data-tables'
 import { columns } from './result-columns'
-import { Result } from '@/types'
+import { Problem, Result } from '@/types'
 
-type Props = {}
+type Props = {problem: Problem}
 
 const data: Result[] = [
   {
     id: "two-sum",
     time: new Date("2020-01-09"),
-    status: "Accepted",
+    status: "accepted",
     language: "Java",
     runtime: "2.5s",
     memory: "12.1 MB"
@@ -18,7 +18,7 @@ const data: Result[] = [
   {
     id: "two-sum",
     time: new Date("2020-01-09"),
-    status: "Wrong Answer",
+    status: "wrong answer",
     language: "Java",
     runtime: "6.5s",
     memory: "32.1 MB"

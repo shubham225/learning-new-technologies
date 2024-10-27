@@ -1,38 +1,105 @@
 import React, { useEffect, useState } from "react";
 import { Check, Loader2, SquareCheck, X } from "lucide-react";
 import { Card } from "../ui/card";
-import { cn } from "@/lib/utils";
+import { cn, getCodeforLanguage } from "@/lib/utils";
 import { Button } from "../ui/button";
 import { toast, ToastContainer } from "react-toastify";
+import { CodeLangDetails, Problem, TestExecution } from "@/types";
+import {
+  submitAndCompileCode,
+  submitAndExecuteCode,
+} from "@/services/problemService";
+import { initTestExecution } from "@/constants/data";
 
-type Props = {};
+type Props = { problem: Problem; codeInfo: CodeLangDetails };
 
 enum CodeStatus {
   NO_ACTION = 0,
-  SUBMITTING = 1,
-  SUBMIT_FAILED = 2,
-  COMPILING = 3,
-  COMPILATION_ERROR = 4,
-  RUNNING = 5,
-  RUNTIME_ERROR = 6,
-  TESTCASE_FAILED = 7,
-  SUCCESS = 8,
+  COMPILING = 1,
+  COMPILATION_ERROR = 2,
+  RUNNING = 3,
+  RUNTIME_ERROR = 4,
+  TESTCASE_FAILED = 5,
+  SUCCESS = 6,
 }
 
-const TestCases = (props: Props) => {
-  const [submitted, setSubmitted] = useState<boolean>(false);
+const TestCases = ({ problem, codeInfo, ...props }: Props) => {
   const [execStatus, setExecStatus] = useState<CodeStatus>(
     CodeStatus.NO_ACTION
   );
-
-  const updateStatus = () => {
-    setExecStatus((execStatus + 1) % 9);
-  };
+  const [testCaseExec, setTestCaseExec] =
+    useState<TestExecution>(initTestExecution);
+  const [disableSubmit, setDisableSubmit] = useState<boolean>(false);
 
   useEffect(() => {
     if (execStatus === CodeStatus.SUCCESS)
       toast.success("Congratulations, Solution is Accepted...");
   }, [execStatus]);
+
+  const delay = (ms: number) => new Promise((res) => setTimeout(res, ms));
+
+  const comileAndExecuteCodeAsync = async () => {
+    setDisableSubmit(true);
+    setExecStatus(CodeStatus.COMPILING);
+    setTestCaseExec((prev) => {
+      return { ...prev, status: "COMPILING" };
+    });
+
+    await delay(5000);
+    const responseCompile = await submitAndCompileCode();
+
+    console.log(responseCompile);
+
+    if (responseCompile.status === "COMPILATION_FAILED") {
+      setExecStatus(CodeStatus.COMPILATION_ERROR);
+      setTestCaseExec({
+        status: responseCompile.status,
+        message: responseCompile.message,
+      });
+      setDisableSubmit(false);
+      return;
+    }
+
+    setExecStatus(CodeStatus.RUNNING);
+
+    await delay(5000);
+    const responseExec = await submitAndExecuteCode();
+
+    if (responseExec.status === "RUNTIME_ERROR") {
+      setExecStatus(CodeStatus.RUNTIME_ERROR);
+      setTestCaseExec({
+        status: responseExec.status,
+        message: responseExec.message,
+      });
+      setDisableSubmit(false);
+      return;
+    }
+
+    if (responseExec.status === "TESTCASE_FAILED") {
+      setExecStatus(CodeStatus.TESTCASE_FAILED);
+      setTestCaseExec({
+        status: responseExec.status,
+        message: responseExec.message,
+      });
+      setDisableSubmit(false);
+      return;
+    }
+
+    if (responseExec.status === "SUCCESS") {
+      setExecStatus(CodeStatus.SUCCESS);
+      setTestCaseExec({
+        status: responseExec.status,
+        message: responseExec.message,
+      });
+    }
+    setDisableSubmit(false);
+  };
+
+  const submitTheCode = React.useCallback(() => {
+    const code = getCodeforLanguage(codeInfo.codes, codeInfo.selLanguage);
+
+    comileAndExecuteCodeAsync();
+  }, [problem, execStatus]);
 
   return (
     <div className="flex flex-col h-full space-between">
@@ -49,7 +116,7 @@ const TestCases = (props: Props) => {
           })}
         >
           {/* Submission  */}
-          <div className="flex gap-2">
+          {/* <div className="flex gap-2">
             {execStatus <= CodeStatus.SUBMITTING && (
               <>
                 <Loader2 className="animate-spin text-teal-400" />
@@ -68,7 +135,7 @@ const TestCases = (props: Props) => {
                 <h1 className="text-sm font-medium">Submitted successfully</h1>
               </>
             )}
-          </div>
+          </div> */}
 
           {/* Compilation  */}
           <div className="flex gap-2">
@@ -129,24 +196,7 @@ const TestCases = (props: Props) => {
                 execStatus !== CodeStatus.TESTCASE_FAILED,
             })}
           >
-            Exception in thread "main" java.lang.ArithmeticException: / by zero
-            at
-            ArithmeticExceptionExample.main(ArithmeticExceptionExample.java:4)
-            Exception in thread "main" java.lang.ArithmeticException: / by zero
-            at
-            ArithmeticExceptionExample.main(ArithmeticExceptionExample.java:4)
-            Exception in thread "main" java.lang.ArithmeticException: / by zero
-            at
-            ArithmeticExceptionExample.main(ArithmeticExceptionExample.java:4)
-            Exception in thread "main" java.lang.ArithmeticException: / by zero
-            at
-            ArithmeticExceptionExample.main(ArithmeticExceptionExample.java:4)
-            Exception in thread "main" java.lang.ArithmeticException: / by zero
-            at
-            ArithmeticExceptionExample.main(ArithmeticExceptionExample.java:4)
-            Exception in thread "main" java.lang.ArithmeticException: / by zero
-            at
-            ArithmeticExceptionExample.main(ArithmeticExceptionExample.java:4)
+            {testCaseExec.message}
           </Card>
         </div>
       </div>
@@ -155,7 +205,7 @@ const TestCases = (props: Props) => {
           <div className="flex-grow"></div>
           <div className="flex gap-2">
             <Button variant="secondary">Run</Button>
-            <Button variant="default" onClick={updateStatus}>
+            <Button variant="default" onClick={submitTheCode} disabled={disableSubmit}>
               Submit
             </Button>
           </div>

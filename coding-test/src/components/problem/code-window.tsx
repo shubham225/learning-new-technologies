@@ -11,43 +11,61 @@ import {
   SelectContent,
   SelectGroup,
   SelectItem,
-  SelectTrigger,
+  SelectTrigger, 
   SelectValue,
 } from "@/components/ui/select";
-import { supportedLanguage } from "@/types";
+import { CodeLangDetails, Language, Problem } from "@/types";
 import { Button } from "../ui/button";
+import { getCodeforLanguage, setCodeforLanguage } from "@/lib/utils";
 
-type Props = {};
+type Props = {
+  problem: Problem;
+  codeInfo: CodeLangDetails;
+  setCodeInfo: React.Dispatch<React.SetStateAction<CodeLangDetails>>;
+};
 
-const CodeWindow = (props: Props) => {
-  const initialCode = {
-    java: `class Solution {
-    public int[] twoSum(int[] nums, int target) {
-        // Write your code here
-    }
-}`,
-    javascript: `console.log('Hello World!!!')`,
-  };
-
+const CodeWindow = ({ problem, codeInfo, setCodeInfo, ...props }: Props) => {
   const { theme } = useTheme();
-  const [selectedLang, setSelectedlang] =
-    React.useState<supportedLanguage>("java");
-  const [code, setCode] = React.useState(initialCode[selectedLang]);
+
+  const initialCode =
+    getCodeforLanguage(codeInfo.codes, codeInfo.selLanguage) ||
+    getCodeforLanguage(problem.codeSnippets, codeInfo.selLanguage);
+
+  const [code, setCode] = React.useState<string>(initialCode);
+  const [selectedLang, setSelectedLang] = React.useState<Language>(
+    codeInfo.selLanguage
+  );
+
+  const updateCodeInfoObject = React.useCallback((language: Language, code: string) => {
+    let codeInfoNew = codeInfo;
+    codeInfoNew.selLanguage = language;
+    setCodeforLanguage(codeInfoNew.codes, language, code);
+    setCodeInfo(codeInfoNew);
+  }, [code, selectedLang]);
 
   const resetEditor = React.useCallback(() => {
-    setCode(initialCode[selectedLang]);
+    const code = getCodeforLanguage(problem.codeSnippets, selectedLang);
+    setCode(code);
+    updateCodeInfoObject(selectedLang, code);
   }, [selectedLang]);
 
   const onCodeChange = React.useCallback(
     (value: string, viewUpdate: ViewUpdate) => {
       setCode(value);
+      updateCodeInfoObject(selectedLang, value);
     },
-    []
+    [selectedLang]
   );
 
-  const onLangChange = React.useCallback((val: supportedLanguage) => {
-    setSelectedlang(val);
-    setCode(initialCode[val]);
+  const onLangChange = React.useCallback((language: Language) => {
+    const code =
+      getCodeforLanguage(codeInfo.codes, language) ||
+      getCodeforLanguage(problem.codeSnippets, language);
+
+    setSelectedLang(language);
+    setCode(code);
+
+    updateCodeInfoObject(language, code);
   }, []);
 
   return (

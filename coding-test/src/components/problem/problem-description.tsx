@@ -3,10 +3,11 @@ import React from "react";
 import MarkdownPreview from "@uiw/react-markdown-preview";
 import { useTheme } from "next-themes";
 import { Badge } from "../ui/badge";
-import { CircleCheck, CircleCheckBig, Clock } from "lucide-react";
+import { CircleCheckBig, Clock } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { Problem } from "@/types";
 
-type Props = {};
+type Props = {problem: Problem};
 
 const ProblemDescription = (props: Props) => {
   const param = useParams();

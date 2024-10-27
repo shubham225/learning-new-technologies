@@ -1,36 +1,34 @@
-import { Card } from "@/components/ui/card";
-import React from "react";
+"use client";
+
+import React, { useEffect, useState } from "react";
 import { DataTable } from "@/components/data-tables";
 import { columns } from "./columns";
-import { Problem } from "@/types";
+import { ProblemSummery } from "@/types";
+import { fetchAllProblems } from "@/services/problemService";
 
 type Props = {};
 
-const data: Problem[] = [
-  {
-    id: "two-sum",
-    status: "open",
-    title: "Two Sum",
-    difficulty: "medium",
-    solutionURI: "https://leetcode.com/problemset/",
-  },
-  {
-    id: "search-insert-position",
-    status: "attempted",
-    title: "Search Insert Position",
-    difficulty: "easy",
-    solutionURI: "https://leetcode.com/problemset/",
-  },
-  {
-    id: "four-sum",
-    status: "solved",
-    title: "Four Sum",
-    difficulty: "hard",
-    solutionURI: "https://leetcode.com/problemset/",
-  },
-];
-
 const problems = (props: Props) => {
+  const [data, setData] = useState<ProblemSummery[] | []>([]);
+  const [isMounted, setIsMounted] = useState(false);
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
+  useEffect(() => {
+    const fetchAllProblemStatements = async () => {
+      const response = await fetchAllProblems();
+      setData(response);
+    };
+
+    fetchAllProblemStatements();
+  }, []);
+
+  if (!isMounted) {
+    return null;
+  }
+  
   return (
     <main className="size-full p-2">
       <DataTable columns={columns} data={data} />

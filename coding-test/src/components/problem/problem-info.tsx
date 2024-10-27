@@ -6,10 +6,13 @@ import React from "react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import ProblemDescription from "./problem-description";
 import ProblemResult from "./problem-result";
+import { Problem } from "@/types";
 
-type Props = {};
+type Props = {
+  problem : Problem
+};
 
-const ProblemInfo = (props: Props) => {
+const ProblemInfo = ({problem, ...props}: Props) => {
   return (
     <Tabs defaultValue="description" className="flex flex-col w-full">
       <TabsList className="flex flex-row justify-start dark:bg-[#333333] bg-gray-50 rounded-t-md rounded-b-none p-0 w-full h-8">
@@ -34,11 +37,11 @@ const ProblemInfo = (props: Props) => {
       </TabsList>
       <TabsContent value="description">
         <div className="flex flex-col gap-1 h-full">
-          <ProblemDescription />
+          <ProblemDescription problem={problem} />
         </div>
       </TabsContent>
       <TabsContent value="result">
-        <ProblemResult />
+        <ProblemResult problem={problem} />
       </TabsContent>
     </Tabs>
   );

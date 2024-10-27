@@ -1,12 +1,11 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { Problem } from "@/types";
+import { ProblemSummery } from "@/types";
 import { ColumnDef } from "@tanstack/react-table";
-import { ArrowUpDown } from "lucide-react";
-import { redirect, useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 
-export const columns: ColumnDef<Problem>[] = [
+export const columns: ColumnDef<ProblemSummery>[] = [
   {
     accessorKey: "status",
     header: "Status",
@@ -30,7 +29,7 @@ export const columns: ColumnDef<Problem>[] = [
           size="sm"
           onClick={() => {
             console.log(row);
-            router.push(`problems/${row.original.id}`)
+            router.push(`problems/${row.original.urlCode}`)
           }}
         >
           Solve
