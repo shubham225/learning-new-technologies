@@ -3,7 +3,6 @@ import "./globals.css";
 import { Inter } from "next/font/google";
 import { ThemeProvider } from "@/providers/theme-provider";
 import { ModeToggle } from "@/components/mode-toggle";
-import { Separator } from "@/components/ui/separator";
 import { ChevronsLeftRightEllipsis } from "lucide-react";
 import Link from "next/link";
 

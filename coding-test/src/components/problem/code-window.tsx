@@ -11,7 +11,7 @@ import {
   SelectContent,
   SelectGroup,
   SelectItem,
-  SelectTrigger, 
+  SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
 import { CodeLangDetails, Language, Problem } from "@/types";
@@ -36,12 +36,15 @@ const CodeWindow = ({ problem, codeInfo, setCodeInfo, ...props }: Props) => {
     codeInfo.selLanguage
   );
 
-  const updateCodeInfoObject = React.useCallback((language: Language, code: string) => {
-    let codeInfoNew = codeInfo;
-    codeInfoNew.selLanguage = language;
-    setCodeforLanguage(codeInfoNew.codes, language, code);
-    setCodeInfo(codeInfoNew);
-  }, [code, selectedLang]);
+  const updateCodeInfoObject = React.useCallback(
+    (language: Language, code: string) => {
+      let codeInfoNew = codeInfo;
+      codeInfoNew.selLanguage = language;
+      setCodeforLanguage(codeInfoNew.codes, language, code);
+      setCodeInfo(codeInfoNew);
+    },
+    [problem, code, selectedLang]
+  );
 
   const resetEditor = React.useCallback(() => {
     const code = getCodeforLanguage(problem.codeSnippets, selectedLang);

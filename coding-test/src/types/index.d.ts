@@ -39,6 +39,7 @@ export type Problem = {
   id: string;
   urlCode: string;
   title: string;
+  descriptionMd: string;
   difficulty: DifficultyLevel;
   status: Status;
   codeSnippets: Code[];

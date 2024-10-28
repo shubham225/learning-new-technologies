@@ -1,14 +1,11 @@
-import { Problem, ProblemSummery } from "@/types";
+import { Problem, ProblemSummery, Submission } from "@/types";
 import apiClient from "./apiClient";
 import { SubmitResponse } from "@/types/api";
-import { dummyProblemSummery, initProblemDetails } from "@/constants/data";
 
 export async function fetchProblemsById(problemId: string): Promise<Problem> {
   try {
-    // const response = await apiClient.get<Problem>(`/problems/${problemId}`);
-    const response: { data: Problem } = {
-      data: initProblemDetails,
-    };
+    const response = await apiClient.get<Problem>(`/problems/${problemId}`);
+
     return response.data;
   } catch (error) {
     console.error("Failed to fetch problem data:", error);
@@ -18,10 +15,7 @@ export async function fetchProblemsById(problemId: string): Promise<Problem> {
 
 export async function fetchAllProblems(): Promise<ProblemSummery[]> {
   try {
-    // const response = await apiClient.get<ProblemSummery[]>('/problems');
-    const response: { data: ProblemSummery[] } = {
-      data: dummyProblemSummery,
-    };
+    const response = await apiClient.get<ProblemSummery[]>("/problems");
 
     return response.data;
   } catch (error) {
@@ -30,12 +24,13 @@ export async function fetchAllProblems(): Promise<ProblemSummery[]> {
   }
 }
 
-export async function fetchProblemDescription(): Promise<ProblemSummery[]> {
+export async function fetchAllSubmissions(
+  problemId: string
+): Promise<Submission[]> {
   try {
-    // const response = await apiClient.get<ProblemSummery[]>('/problems');
-    const response: { data: ProblemSummery[] } = {
-      data: dummyProblemSummery,
-    };
+    const response = await apiClient.get<Submission[]>(
+      `/submissions/${problemId}`
+    );
 
     return response.data;
   } catch (error) {
@@ -45,18 +40,13 @@ export async function fetchProblemDescription(): Promise<ProblemSummery[]> {
 }
 
 // Test Case Submission
-export async function submitAndCompileCode(): Promise<SubmitResponse> {
+export async function submitAndCompileCode(
+  problemId: string
+): Promise<SubmitResponse> {
   try {
-    // const response = await apiClient.get<ProblemSummery[]>('/problems');
-    const response: { data: SubmitResponse } = {
-      data: {
-        submission: null,
-        status: "COMPILATION_SUCCESS",
-        message: `Exception in thread "main" java.lang.ArithmeticException: / by zero
-            at
-            ArithmeticExceptionExample.main(ArithmeticExceptionExample.java:4)`,
-      },
-    };
+    const response = await apiClient.post<SubmitResponse>(
+      `/submissions/compile/${problemId}`
+    );
 
     return response.data;
   } catch (error) {
@@ -65,18 +55,13 @@ export async function submitAndCompileCode(): Promise<SubmitResponse> {
   }
 }
 
-export async function submitAndExecuteCode(): Promise<SubmitResponse> {
+export async function submitAndExecuteCode(
+  problemId: string
+): Promise<SubmitResponse> {
   try {
-    // const response = await apiClient.get<ProblemSummery[]>('/problems');
-    const response: { data: SubmitResponse } = {
-      data: {
-        submission: null,
-        status: "TESTCASE_FAILED",
-        message: `Exception in thread "main" java.lang.ArithmeticException: / by zero
-            at
-            ArithmeticExceptionExample.main(ArithmeticExceptionExample.java:4)`,
-      },
-    };
+    const response = await apiClient.post<SubmitResponse>(
+      `/submissions/exec/${problemId}`
+    );
 
     return response.data;
   } catch (error) {

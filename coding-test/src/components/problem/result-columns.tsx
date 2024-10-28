@@ -1,14 +1,15 @@
-"use client";
-
-import { Button } from "@/components/ui/button";
-import { Problem, Result } from "@/types";
+import { Submission } from "@/types";
 import { ColumnDef } from "@tanstack/react-table";
-import { ArrowUpDown } from "lucide-react";
-import { redirect, useRouter } from "next/navigation";
 import { Badge } from "../ui/badge";
-import { cn, formatDate } from "@/lib/utils";
+import {
+  capitalizeFirstLetterOfEachWord,
+  cn,
+  formatBytes,
+  formatDate,
+  formatMilliseconds,
+} from "@/lib/utils";
 
-export const columns: ColumnDef<Result>[] = [
+export const columns: ColumnDef<Submission>[] = [
   {
     accessorKey: "status",
     header: "Status",
@@ -17,14 +18,14 @@ export const columns: ColumnDef<Result>[] = [
         <div className="flex flex-col gap-1">
           <h1
             className={cn("text-md font-medium", {
-              "text-teal-600": row.original.status === "Accepted",
-              "text-red-600": row.original.status === "Wrong Answer",
+              "text-teal-600": row.original.status === "accepted",
+              "text-red-600": row.original.status === "wrong answer",
             })}
           >
-            {row.original.status}
+            {capitalizeFirstLetterOfEachWord(row.original.status)}
           </h1>
           <h1 className="text-xs font-normal">
-            {formatDate(row.original.time)}
+            {formatDate(row.original.date)}
           </h1>
         </div>
       );
@@ -33,14 +34,20 @@ export const columns: ColumnDef<Result>[] = [
   {
     accessorKey: "language",
     header: "Language",
-    cell: ({ row }) => <Badge variant="secondary">{row.getValue("language")}</Badge>,
+    cell: ({ row }) => (
+      <Badge variant="secondary">
+        {capitalizeFirstLetterOfEachWord(row.original.language)}
+      </Badge>
+    ),
   },
   {
     accessorKey: "runtime",
     header: "Runtime",
+    cell: ({ row }) => <div>{formatMilliseconds(row.original.runtime)}</div>,
   },
   {
     accessorKey: "memory",
     header: "Memory",
+    cell: ({ row }) => <div>{formatBytes(row.original.memory)}</div>,
   },
 ];

@@ -1,3 +1,5 @@
+"use client"
+
 import React, { useEffect, useState } from "react";
 import { Check, Loader2, SquareCheck, X } from "lucide-react";
 import { Card } from "../ui/card";
@@ -45,8 +47,9 @@ const TestCases = ({ problem, codeInfo, ...props }: Props) => {
       return { ...prev, status: "COMPILING" };
     });
 
+    // TODO: Remove the delay after testing
     await delay(5000);
-    const responseCompile = await submitAndCompileCode();
+    const responseCompile = await submitAndCompileCode(problem.id);
 
     console.log(responseCompile);
 
@@ -62,8 +65,9 @@ const TestCases = ({ problem, codeInfo, ...props }: Props) => {
 
     setExecStatus(CodeStatus.RUNNING);
 
+    // TODO: Remove the delay after testing
     await delay(5000);
-    const responseExec = await submitAndExecuteCode();
+    const responseExec = await submitAndExecuteCode(problem.id);
 
     if (responseExec.status === "RUNTIME_ERROR") {
       setExecStatus(CodeStatus.RUNTIME_ERROR);
@@ -115,28 +119,6 @@ const TestCases = ({ problem, codeInfo, ...props }: Props) => {
             hidden: execStatus === CodeStatus.NO_ACTION,
           })}
         >
-          {/* Submission  */}
-          {/* <div className="flex gap-2">
-            {execStatus <= CodeStatus.SUBMITTING && (
-              <>
-                <Loader2 className="animate-spin text-teal-400" />
-                <h1 className="text-sm font-medium">Submitting code...</h1>
-              </>
-            )}
-            {execStatus === CodeStatus.SUBMIT_FAILED && (
-              <>
-                <X className="text-red-600" />
-                <h1 className="text-sm font-medium">Submit Failed</h1>
-              </>
-            )}
-            {execStatus > CodeStatus.SUBMIT_FAILED && (
-              <>
-                <Check className="text-green-500" />
-                <h1 className="text-sm font-medium">Submitted successfully</h1>
-              </>
-            )}
-          </div> */}
-
           {/* Compilation  */}
           <div className="flex gap-2">
             {execStatus <= CodeStatus.COMPILING && (
@@ -205,7 +187,11 @@ const TestCases = ({ problem, codeInfo, ...props }: Props) => {
           <div className="flex-grow"></div>
           <div className="flex gap-2">
             <Button variant="secondary">Run</Button>
-            <Button variant="default" onClick={submitTheCode} disabled={disableSubmit}>
+            <Button
+              variant="default"
+              onClick={submitTheCode}
+              disabled={disableSubmit}
+            >
               Submit
             </Button>
           </div>

@@ -1,18 +1,15 @@
-"use client";
-
-import { FileText, History } from "lucide-react";
-import { useParams } from "next/navigation";
 import React from "react";
+import { FileText, History } from "lucide-react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import ProblemDescription from "./problem-description";
 import ProblemResult from "./problem-result";
 import { Problem } from "@/types";
 
 type Props = {
-  problem : Problem
+  problem: Problem;
 };
 
-const ProblemInfo = ({problem, ...props}: Props) => {
+const ProblemInfo = ({ problem, ...props }: Props) => {
   return (
     <Tabs defaultValue="description" className="flex flex-col w-full">
       <TabsList className="flex flex-row justify-start dark:bg-[#333333] bg-gray-50 rounded-t-md rounded-b-none p-0 w-full h-8">

@@ -12,7 +12,7 @@ export const columns: ColumnDef<ProblemSummery>[] = [
   },
   {
     accessorKey: "title",
-    header: "Title"
+    header: "Title",
   },
   {
     accessorKey: "difficulty",
@@ -28,8 +28,7 @@ export const columns: ColumnDef<ProblemSummery>[] = [
           variant="default"
           size="sm"
           onClick={() => {
-            console.log(row);
-            router.push(`problems/${row.original.urlCode}`)
+            router.push(`problems/${row.original.urlCode}`);
           }}
         >
           Solve

@@ -35,7 +35,7 @@ const ProblemPage = (props: Props) => {
     };
 
     fetchProblemByIdAsync();
-  }, []);
+  }, [params.problemId]);
 
   if (!isMounted) {
     return null;
@@ -50,12 +50,16 @@ const ProblemPage = (props: Props) => {
         cursor="col-resize"
       >
         <div className="border size-full rounded-md dark:bg-[#1e1e1e]">
-          <ProblemInfo problem={problem}/>
+          <ProblemInfo problem={problem} />
         </div>
         <div className="size-full flex flex-col">
           <Split className="size-full" sizes={[65, 35]} direction="vertical">
             <Card className="flex flex-col border gap-2 size-full rounded-md dark:bg-[#1e1e1e]">
-              <CodeWindow problem={problem} codeInfo={codes} setCodeInfo={setCodes} />
+              <CodeWindow
+                problem={problem}
+                codeInfo={codes}
+                setCodeInfo={setCodes}
+              />
             </Card>
             <div className="flex flex-col border gap-2 size-full rounded-md dark:bg-[#1e1e1e]">
               <TestCases problem={problem} codeInfo={codes} />

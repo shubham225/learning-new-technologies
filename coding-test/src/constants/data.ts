@@ -1,4 +1,12 @@
-import { Code, CodeLangDetails, Problem, ProblemSummery, Submission, TestExecution, User } from "@/types";
+import {
+  Code,
+  CodeLangDetails,
+  Problem,
+  ProblemSummery,
+  Submission,
+  TestExecution,
+  User,
+} from "@/types";
 
 export const initProblemDetails: Problem = {
   id: "344utvyb-4rhbhfj",
@@ -6,7 +14,29 @@ export const initProblemDetails: Problem = {
   status: "open",
   title: "Two Sum",
   difficulty: "medium",
-  codeSnippets: [ 
+  descriptionMd: `
+Given an array of integers nums and an integer target, return indices of the two numbers such that they add up to target.
+You may assume that each input would have exactly one solution, and you may not use the same element twice.
+You can return the answer in any order.
+
+#### Example 1:
+> **Input:** nums = [2,7,11,15], target = 9
+>
+> **Output:** [0,1]
+>
+> **Explanation:** Because nums[0] + nums[1] == 9, we return [0, 1].
+
+#### Example 2:
+> **Input:** nums = [3,2,4], target = 6
+>
+> **Output:** [1,2]
+
+#### Constraints:
+ + \`2 <= nums.length <= 104\`
+ + \`-109 <= nums[i] <= 109\`
+ + \`-109 <= target <= 109\`
+`,
+  codeSnippets: [
     {
       id: "dummyID",
       language: "java",
@@ -62,8 +92,8 @@ export const initCodeLangDetails: CodeLangDetails = {
 
 export const initTestExecution: TestExecution = {
   status: "NO_ACTION",
-  message: ""
-}
+  message: "",
+};
 
 export const dummyProblemSummery: ProblemSummery[] = [
   {
@@ -86,5 +116,26 @@ export const dummyProblemSummery: ProblemSummery[] = [
     status: "solved",
     title: "Four Sum",
     difficulty: "hard",
+  },
+];
+
+export const dummyProblemSubmissions: Submission[] = [
+  {
+    id: "two-sum",
+    userProblemId: "dummyID",
+    date: new Date("2020-01-09"),
+    status: "accepted",
+    language: "java",
+    runtime: 13000,
+    memory: 125000,
+  },
+  {
+    id: "two-sum",
+    userProblemId: "dummyID",
+    date: new Date("2022-01-09"),
+    status: "wrong answer",
+    language: "java",
+    runtime: 219000,
+    memory: 2232000,
   },
 ];
