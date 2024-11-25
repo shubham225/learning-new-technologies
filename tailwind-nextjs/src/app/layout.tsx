@@ -14,15 +14,13 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className="container p-3 h-screen">
+      <body className="h-screen w-screen">
         <ThemeProvider
             attribute="class"
             defaultTheme="system"
             enableSystem
             disableTransitionOnChange>
-        <div className="border h-full p-2 rounded-lg shadow-sm overflow-auto">
-          <div className="m-2">{children}</div>
-        </div>
+          {children}
         </ThemeProvider>
       </body>
     </html>
