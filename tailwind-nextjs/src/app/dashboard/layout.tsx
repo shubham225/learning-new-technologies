@@ -1,8 +1,8 @@
-import { SidebarProvider, SidebarTrigger } from '@/components/ui/sidebar'
-import React from 'react'
-import { AppSidebar } from './app-sidebar'
+import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
+import React from "react";
+import { AppSidebar } from "./app-sidebar";
 
-type Props = {}
+type Props = {};
 
 export default function DashboardLayout({
   children,
@@ -12,9 +12,7 @@ export default function DashboardLayout({
   return (
     <SidebarProvider>
       <AppSidebar />
-      <main className='p-2 size-full'>
-        {children}
-      </main>
+      <main className="p-2 size-full">{children}</main>
     </SidebarProvider>
-  )
+  );
 }
