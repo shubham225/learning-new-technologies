@@ -6,7 +6,7 @@ import {
   Submission,
   TestExecution,
   User,
-} from "@/types";
+} from "@/types"
 
 export const initProblemDetails: Problem = {
   id: "344utvyb-4rhbhfj",
