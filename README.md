@@ -1,2 +1,2 @@
 # Learning-New-Technologies
-Repository for learning new technologies
+Repository for learning technologies
