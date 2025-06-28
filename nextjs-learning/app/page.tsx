@@ -1,24 +1,27 @@
-import Image from "next/image";
+import { Button } from "@/components/ui/button";
+import { Code2 } from "lucide-react"
 
 export default function Home() {
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      
-        
-        <ol className="list-inside list-decimal text-sm/6 text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-[family-name:var(--font-geist-mono)] font-semibold">
-              app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
-    <div className="font-[family-name:var(--font-geist-mono)]">cvxcbvxcbcxb</div>
-      
+    <div className="h-screen flex flex-col gap-0">
+      {/* Navbar */}
+      <div className="bg-amber-300 w-full p-4 flex justify-between">
+        <div className="flex gap-1 items-center">
+          <Code2 size={30} />
+          <div className="flex flex-col gap-0">
+            <div className="font-mono text-xs">Code</div>
+            <div className="font-bold text-sm">Learning</div>
+          </div>
+        </div>
+        <div className="flex gap-2">
+          Navigation Menu
+        </div>
+        <Button variant="outline" className="bg-transparent rounded-4xl">Sign In</Button>
+      </div>
+      {/* Main Containts*/}
+      <div className="bg-red-300 w-full">
+        Main Page
+      </div>
     </div>
   );
 }
